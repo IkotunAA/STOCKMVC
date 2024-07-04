@@ -1,0 +1,36 @@
+﻿@model IEnumerable<STOCKMVC.Models.ProductModel>
+
+@{
+    ViewData["Title"] = "Product";
+}
+
+<h2>Product List</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Add New Product</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Cost Price</th>
+            <th>Selling Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.CostPrice</td>
+                <td>@item.SellingPrice</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ProductName">Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductName">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

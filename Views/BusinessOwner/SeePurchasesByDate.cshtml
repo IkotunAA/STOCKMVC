@@ -1,0 +1,51 @@
+﻿@model IEnumerable<STOCKMVC.Entities.Purchase>
+
+@{
+    ViewData["Title"] = "Purchases By Date";
+}
+
+<h2>Purchases By Date</h2>
+
+<form asp-action="SeePurchasesByDate" method="post">
+    <div class="form-group">
+        <label>Start Date</label>
+        <input type="date" name="startDate" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>End Date</label>
+        <input type="date" name="endDate" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
+</form>
+
+@if (Model != null)
+{
+    <h3>Results</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Purchase ID</th>
+                <th>Customer Name</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Purchase Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var purchase in Model)
+            {
+                <tr>
+                    <td>@purchase.Id</td>
+                    <td>@purchase.UserName</td>
+                    <td>@purchase.ProductName</td>
+                    <td>@purchase.Quantity</td>
+                    <td>@purchase.Price</td>
+                    <td>@purchase.CreatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

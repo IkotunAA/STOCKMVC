@@ -1,0 +1,99 @@
+﻿@model List<CartItemModel>
+
+@{
+    ViewData["Title"] = "Your Cart";
+}
+
+<h2>Your Cart</h2>
+
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                 <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price.ToString("C")</td>
+                <td>@item.TotalPrice.ToString("C")</td>
+                    <form asp-controller="Customer" asp-action="RemoveFromCart" method="post" style="display:inline;">
+                        <input type="hidden" name="cartId" value="@item.CartId" />
+                        <input type="submit" value="Remove" class="btn btn-danger" />
+                    </form>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+   @*  <div class="total">
+        <h3>Total Price: @Model.TotalPrice.ToString("C")</h3>
+    </div> *@
+
+<div>
+    <form asp-controller="Customer" asp-action="Checkout" method="post">
+        <input type="submit" value="Checkout" class="btn btn-primary" />
+    </form>
+    </div>
+    <form asp-controller="Customer" asp-action="ClearCart" method="post">
+        <input type="submit" value="Clear All" class="btn btn-warning" />
+    </form>
+
+    
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
+
+
+@*  @model IEnumerable<STOCKMVC.Models.CartItemModel>
+
+@{
+    ViewData["Title"] = "View Cart";
+}
+
+<h2>View Cart</h2>
+
+@if (!Model.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+                    <td>@(item.Quantity * item.Price)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h3>Total Price: @ViewBag.TotalPrice</h3>
+
+    <form asp-action="Checkout" method="post">
+        <input type="submit" value="Checkout" class="btn btn-primary" />
+    </form>
+} *@

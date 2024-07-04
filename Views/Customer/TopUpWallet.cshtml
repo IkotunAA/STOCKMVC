@@ -1,0 +1,18 @@
+﻿@model STOCKMVC.Entities.Wallet
+
+@{
+    ViewData["Title"] = "Top Up Wallet";
+}
+
+<h2>Top Up Wallet</h2>
+
+<form asp-action="TopUpWallet" method="post">
+    <div class="form-group">
+        <label asp-for="amount" class="control-label"></label>
+        <input asp-for="amount" class="form-control" />
+        <span asp-validation-for="amount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Top Up" class="btn btn-primary" />
+    </div>
+</form>

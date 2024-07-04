@@ -1,0 +1,36 @@
+﻿@model IEnumerable<STOCKMVC.Models.ProductResponse>
+
+@{
+    ViewData["Title"] = "Available Products";
+}
+
+<h2>Available Products</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var productResponse in Model)
+        {
+            var product = productResponse.Data;
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.Quantity</td>
+                <td>@product.SellingPrice</td>
+                <td>
+                    <form asp-action="AddToCart" method="post">
+                        <input type="hidden" name="productId" value="@product.Id" />
+                        <input type="number" name="quantity" value="1" min="1" />
+                        <input type="submit" value="Add to Cart" class="btn btn-primary" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
